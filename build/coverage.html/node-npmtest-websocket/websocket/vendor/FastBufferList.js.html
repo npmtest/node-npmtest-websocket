@@ -1,0 +1,806 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for node-npmtest-websocket/websocket/vendor/FastBufferList.js</title>
+    <meta charset="utf-8">
+    <style>
+        body, html {
+            margin:0; padding: 0;
+        }
+        body {
+            font-family: Arial, Helvetica;
+            font-size: 10pt;
+        }
+        div.header, div.footer {
+            background: #eee;
+            padding: 1em;
+        }
+        div.header {
+            height: 160px;
+            padding: 0 1em 0 1em;
+            z-index: 100;
+            position: fixed;
+            top: 0;
+            border-bottom: 1px solid #666;
+            width: 100%;
+        }
+        div.footer {
+            border-top: 1px solid #666;
+        }
+        div.body {
+            margin-top: 170px;
+        }
+        div.meta {
+            font-size: 90%;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            font-weight: normal;
+        }
+        h1 {
+            font-size: 12pt;
+        }
+        h2 {
+            font-size: 10pt;
+        }
+        pre {
+            font-family: Menlo, Monaco, Consolas, Courier New, monospace;
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            tab-size: 2;
+        }
+
+        div.path { font-size: 110%; }
+        div.path a:link, div.path a:visited { color: #000; }
+        table.coverage { border-collapse: collapse; margin:0; padding: 0 }
+
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
+        .cstat-yes { color: #111; }
+        .cstat-no { background: #fc8c84; color: #111; }
+        .fstat-no { background: #ffc520; color: #111 !important; }
+        .cbranch-no { background:  yellow !important; color: #111; }
+
+        .cstat-skip { background: #ddd; color: #111; }
+        .fstat-skip { background: #ddd; color: #111 !important; }
+        .cbranch-skip { background: #ddd !important; color: #111; }
+
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+        }
+
+        .skip-if-branch {
+            display: none;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: #ccc;
+            color: white;
+        }
+
+        .missing-if-branch .typ, .skip-if-branch .typ {
+            color: inherit !important;
+        }
+
+        .entity, .metric { font-weight: bold; }
+        .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
+        .metric small { font-size: 80%; font-weight: normal; color: #666; }
+
+        div.coverage-summary table { border-collapse: collapse; margin: 3em; font-size: 110%; }
+        div.coverage-summary td, div.coverage-summary table  th { margin: 0; padding: 0.25em 1em; border-top: 1px solid #666; border-bottom: 1px solid #666; }
+        div.coverage-summary th { text-align: left; border: 1px solid #666; background: #eee; font-weight: normal; }
+        div.coverage-summary th.file { border-right: none !important; }
+        div.coverage-summary th.pic { border-left: none !important; text-align: right; }
+        div.coverage-summary th.pct { border-right: none !important; }
+        div.coverage-summary th.abs { border-left: none !important; text-align: right; }
+        div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
+        div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
+        div.coverage-summary a:link { color: #000; }
+        div.coverage-summary a:visited { color: #333; }
+        div.coverage-summary tfoot td { border-top: 1px solid #666; }
+
+        div.coverage-summary .yui3-datatable-sort-indicator, div.coverage-summary .dummy-sort-indicator {
+            height: 10px;
+            width: 7px;
+            display: inline-block;
+            margin-left: 0.5em;
+        }
+        div.coverage-summary .yui3-datatable-sort-indicator {
+            background: no-repeat scroll 0 0 transparent;
+        }
+        div.coverage-summary .yui3-datatable-sorted .yui3-datatable-sort-indicator {
+            background-position: 0 -20px;
+        }
+        div.coverage-summary .yui3-datatable-sorted-desc .yui3-datatable-sort-indicator {
+            background-position: 0 -10px;
+        }
+
+        .high { background: #b5d592 !important; }
+        .medium { background: #ffe87c !important; }
+        .low { background: #fc8c84 !important; }
+
+        span.cover-fill, span.cover-empty {
+            display:inline-block;
+            border:1px solid #444;
+            background: white;
+            height: 12px;
+        }
+        span.cover-fill {
+            background: #ccc;
+            border-right: 1px solid #444;
+        }
+        span.cover-empty {
+            background: white;
+            border-left: none;
+        }
+        span.cover-full {
+            border-right: none !important;
+        }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
+        .ignore-none { color: #999; font-weight: normal; }
+
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1 style="font-weight: bold;">
+        <a href="https://github.com/npmtest/node-npmtest-websocket">npmtest-websocket (v0.0.1)</a>
+    </h1>
+    <h1>Code coverage report for <span class="entity">node-npmtest-websocket/websocket/vendor/FastBufferList.js</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">5.31% <small>(6 / 113)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">0% <small>(0 / 60)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">0% <small>(0 / 14)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">6.32% <small>(6 / 95)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../../index.html">All files</a> &#187; <a href="index.html">node-npmtest-websocket/websocket/vendor/</a> &#187; FastBufferList.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">// This file was copied from https://github.com/substack/node-bufferlist
+// and modified to be able to copy bytes from the bufferlist directly into
+// a pre-existing fixed-size buffer without an additional memory allocation.
+&nbsp;
+// bufferlist.js
+// Treat a linked list of buffers as a single variable-size buffer.
+var Buffer = require('buffer').Buffer;
+var EventEmitter = require('events').EventEmitter;
+&nbsp;
+module.exports = BufferList;
+module.exports.BufferList = BufferList; // backwards compatibility
+&nbsp;
+<span class="fstat-no" title="function not covered" >function BufferList(opts) {</span>
+<span class="cstat-no" title="statement not covered" >    if (!(this instanceof BufferList)) <span class="cstat-no" title="statement not covered" >return new BufferList(opts);</span></span>
+<span class="cstat-no" title="statement not covered" >    EventEmitter.call(this);</span>
+<span class="cstat-no" title="statement not covered" >    var self = this;</span>
+    
+<span class="cstat-no" title="statement not covered" >    if (typeof(opts) == 'undefined') <span class="cstat-no" title="statement not covered" >opts = {};</span></span>
+    
+    // default encoding to use for take(). Leaving as 'undefined'
+    // makes take() return a Buffer instead.
+<span class="cstat-no" title="statement not covered" >    self.encoding = opts.encoding;</span>
+    
+    // constructor to use for Buffer-esque operations
+<span class="cstat-no" title="statement not covered" >    self.construct = opts.construct || Buffer;</span>
+    
+<span class="cstat-no" title="statement not covered" >    var head = { next : null, buffer : null };</span>
+<span class="cstat-no" title="statement not covered" >    var last = { next : null, buffer : null };</span>
+    
+    // length can get negative when advanced past the end
+    // and this is the desired behavior
+<span class="cstat-no" title="statement not covered" >    var length = 0;</span>
+<span class="cstat-no" title="statement not covered" >    self.__defineGetter__('length', <span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >        return length;</span>
+    });
+    
+    // keep an offset of the head to decide when to head = head.next
+<span class="cstat-no" title="statement not covered" >    var offset = 0;</span>
+    
+    // Write to the bufferlist. Emits 'write'. Always returns true.
+<span class="cstat-no" title="statement not covered" >    self.write = <span class="fstat-no" title="function not covered" >function (buf) {</span></span>
+<span class="cstat-no" title="statement not covered" >        if (!head.buffer) {</span>
+<span class="cstat-no" title="statement not covered" >            head.buffer = buf;</span>
+<span class="cstat-no" title="statement not covered" >            last = head;</span>
+        }
+        else {
+<span class="cstat-no" title="statement not covered" >            last.next = { next : null, buffer : buf };</span>
+<span class="cstat-no" title="statement not covered" >            last = last.next;</span>
+        }
+<span class="cstat-no" title="statement not covered" >        length += buf.length;</span>
+<span class="cstat-no" title="statement not covered" >        self.emit('write', buf);</span>
+<span class="cstat-no" title="statement not covered" >        return true;</span>
+    };
+    
+<span class="cstat-no" title="statement not covered" >    self.end = <span class="fstat-no" title="function not covered" >function (buf) {</span></span>
+<span class="cstat-no" title="statement not covered" >        if (Buffer.isBuffer(buf)) <span class="cstat-no" title="statement not covered" >self.write(buf);</span></span>
+    };
+    
+    // Push buffers to the end of the linked list. (deprecated)
+    // Return this (self).
+<span class="cstat-no" title="statement not covered" >    self.push = <span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >        var args = [].concat.apply([], arguments);</span>
+<span class="cstat-no" title="statement not covered" >        args.forEach(self.write);</span>
+<span class="cstat-no" title="statement not covered" >        return self;</span>
+    };
+    
+    // For each buffer, perform some action.
+    // If fn's result is a true value, cut out early.
+    // Returns this (self).
+<span class="cstat-no" title="statement not covered" >    self.forEach = <span class="fstat-no" title="function not covered" >function (fn) {</span></span>
+<span class="cstat-no" title="statement not covered" >        if (!head.buffer) <span class="cstat-no" title="statement not covered" >return new self.construct(0);</span></span>
+        
+<span class="cstat-no" title="statement not covered" >        if (head.buffer.length - offset &lt;= 0) <span class="cstat-no" title="statement not covered" >return self;</span></span>
+<span class="cstat-no" title="statement not covered" >        var firstBuf = head.buffer.slice(offset);</span>
+        
+<span class="cstat-no" title="statement not covered" >        var b = { buffer : firstBuf, next : head.next };</span>
+        
+<span class="cstat-no" title="statement not covered" >        while (b &amp;&amp; b.buffer) {</span>
+<span class="cstat-no" title="statement not covered" >            var r = fn(b.buffer);</span>
+<span class="cstat-no" title="statement not covered" >            if (r) <span class="cstat-no" title="statement not covered" >break;</span></span>
+<span class="cstat-no" title="statement not covered" >            b = b.next;</span>
+        }
+        
+<span class="cstat-no" title="statement not covered" >        return self;</span>
+    };
+    
+    // Create a single Buffer out of all the chunks or some subset specified by
+    // start and one-past the end (like slice) in bytes.
+<span class="cstat-no" title="statement not covered" >    self.join = <span class="fstat-no" title="function not covered" >function (start, end) {</span></span>
+<span class="cstat-no" title="statement not covered" >        if (!head.buffer) <span class="cstat-no" title="statement not covered" >return new self.construct(0);</span></span>
+<span class="cstat-no" title="statement not covered" >        if (start == undefined) <span class="cstat-no" title="statement not covered" >start = 0;</span></span>
+<span class="cstat-no" title="statement not covered" >        if (end == undefined) <span class="cstat-no" title="statement not covered" >end = self.length;</span></span>
+        
+<span class="cstat-no" title="statement not covered" >        var big = new self.construct(end - start);</span>
+<span class="cstat-no" title="statement not covered" >        var ix = 0;</span>
+<span class="cstat-no" title="statement not covered" >        self.forEach(<span class="fstat-no" title="function not covered" >function (buffer) {</span></span>
+<span class="cstat-no" title="statement not covered" >            if (start &lt; (ix + buffer.length) &amp;&amp; ix &lt; end) {</span>
+                // at least partially contained in the range
+<span class="cstat-no" title="statement not covered" >                buffer.copy(</span>
+                    big,
+                    Math.max(0, ix - start),
+                    Math.max(0, start - ix),
+                    Math.min(buffer.length, end - ix)
+                );
+            }
+<span class="cstat-no" title="statement not covered" >            ix += buffer.length;</span>
+<span class="cstat-no" title="statement not covered" >            if (ix &gt; end) <span class="cstat-no" title="statement not covered" >return true; </span></span>// stop processing past end
+        });
+        
+<span class="cstat-no" title="statement not covered" >        return big;</span>
+    };
+    
+<span class="cstat-no" title="statement not covered" >    self.joinInto = <span class="fstat-no" title="function not covered" >function (targetBuffer, targetStart, sourceStart, sourceEnd) {</span></span>
+<span class="cstat-no" title="statement not covered" >        if (!head.buffer) <span class="cstat-no" title="statement not covered" >return new self.construct(0);</span></span>
+<span class="cstat-no" title="statement not covered" >        if (sourceStart == undefined) <span class="cstat-no" title="statement not covered" >sourceStart = 0;</span></span>
+<span class="cstat-no" title="statement not covered" >        if (sourceEnd == undefined) <span class="cstat-no" title="statement not covered" >sourceEnd = self.length;</span></span>
+        
+<span class="cstat-no" title="statement not covered" >        var big = targetBuffer;</span>
+<span class="cstat-no" title="statement not covered" >        if (big.length - targetStart &lt; sourceEnd - sourceStart) {</span>
+<span class="cstat-no" title="statement not covered" >            throw new Error("Insufficient space available in target Buffer.");</span>
+        }
+<span class="cstat-no" title="statement not covered" >        var ix = 0;</span>
+<span class="cstat-no" title="statement not covered" >        self.forEach(<span class="fstat-no" title="function not covered" >function (buffer) {</span></span>
+<span class="cstat-no" title="statement not covered" >            if (sourceStart &lt; (ix + buffer.length) &amp;&amp; ix &lt; sourceEnd) {</span>
+                // at least partially contained in the range
+<span class="cstat-no" title="statement not covered" >                buffer.copy(</span>
+                    big,
+                    Math.max(targetStart, targetStart + ix - sourceStart),
+                    Math.max(0, sourceStart - ix),
+                    Math.min(buffer.length, sourceEnd - ix)
+                );
+            }
+<span class="cstat-no" title="statement not covered" >            ix += buffer.length;</span>
+<span class="cstat-no" title="statement not covered" >            if (ix &gt; sourceEnd) <span class="cstat-no" title="statement not covered" >return true; </span></span>// stop processing past end
+        });
+        
+<span class="cstat-no" title="statement not covered" >        return big;</span>
+    };
+    
+    // Advance the buffer stream by n bytes.
+    // If n the aggregate advance offset passes the end of the buffer list,
+    // operations such as .take() will return empty strings until enough data is
+    // pushed.
+    // Returns this (self).
+<span class="cstat-no" title="statement not covered" >    self.advance = <span class="fstat-no" title="function not covered" >function (n) {</span></span>
+<span class="cstat-no" title="statement not covered" >        offset += n;</span>
+<span class="cstat-no" title="statement not covered" >        length -= n;</span>
+<span class="cstat-no" title="statement not covered" >        while (head.buffer &amp;&amp; offset &gt;= head.buffer.length) {</span>
+<span class="cstat-no" title="statement not covered" >            offset -= head.buffer.length;</span>
+<span class="cstat-no" title="statement not covered" >            head = head.next</span>
+                ? head.next
+                : { buffer : null, next : null }
+            ;
+        }
+<span class="cstat-no" title="statement not covered" >        if (head.buffer === null) <span class="cstat-no" title="statement not covered" >last = { next : null, buffer : null };</span></span>
+<span class="cstat-no" title="statement not covered" >        self.emit('advance', n);</span>
+<span class="cstat-no" title="statement not covered" >        return self;</span>
+    };
+    
+    // Take n bytes from the start of the buffers.
+    // Returns a string.
+    // If there are less than n bytes in all the buffers or n is undefined,
+    // returns the entire concatenated buffer string.
+<span class="cstat-no" title="statement not covered" >    self.take = <span class="fstat-no" title="function not covered" >function (n, encoding) {</span></span>
+<span class="cstat-no" title="statement not covered" >        if (n == undefined) <span class="cstat-no" title="statement not covered" >n = self.length;</span></span>
+        else <span class="cstat-no" title="statement not covered" >if (typeof n !== 'number') {</span>
+<span class="cstat-no" title="statement not covered" >            encoding = n;</span>
+<span class="cstat-no" title="statement not covered" >            n = self.length;</span>
+        }
+<span class="cstat-no" title="statement not covered" >        var b = head;</span>
+<span class="cstat-no" title="statement not covered" >        if (!encoding) <span class="cstat-no" title="statement not covered" >encoding = self.encoding;</span></span>
+<span class="cstat-no" title="statement not covered" >        if (encoding) {</span>
+<span class="cstat-no" title="statement not covered" >            var acc = '';</span>
+<span class="cstat-no" title="statement not covered" >            self.forEach(<span class="fstat-no" title="function not covered" >function (buffer) {</span></span>
+<span class="cstat-no" title="statement not covered" >                if (n &lt;= 0) <span class="cstat-no" title="statement not covered" >return true;</span></span>
+<span class="cstat-no" title="statement not covered" >                acc += buffer.toString(</span>
+                    encoding, 0, Math.min(n,buffer.length)
+                );
+<span class="cstat-no" title="statement not covered" >                n -= buffer.length;</span>
+            });
+<span class="cstat-no" title="statement not covered" >            return acc;</span>
+        } else {
+            // If no 'encoding' is specified, then return a Buffer.
+<span class="cstat-no" title="statement not covered" >            return self.join(0, n);</span>
+        }
+    };
+    
+    // The entire concatenated buffer as a string.
+<span class="cstat-no" title="statement not covered" >    self.toString = <span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >        return self.take('binary');</span>
+    };
+}
+require('util').inherits(BufferList, EventEmitter);
+&nbsp;
+&nbsp;</pre></td></tr>
+</table></pre>
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a> at Tue Apr 11 2017 11:10:08 GMT+0000 (UTC)</div>
+</div>
+</body>
+</html>
