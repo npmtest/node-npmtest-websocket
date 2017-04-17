@@ -7,7 +7,7 @@
 <tspan x="10" y="74">└─┬ websocket@1.0.24 </tspan>
 <tspan x="10" y="90">  ├─┬ debug@2.6.3 </tspan>
 <tspan x="10" y="106">  │ └── ms@0.7.2 </tspan>
-<tspan x="10" y="122">  ├── nan@2.6.1 </tspan>
+<tspan x="10" y="122">  ├── nan@2.6.2 </tspan>
 <tspan x="10" y="138">  ├─┬ typedarray-to-buffer@3.1.2 </tspan>
 <tspan x="10" y="154">  │ └── is-typedarray@1.0.0 </tspan>
 <tspan x="10" y="170">  └── yaeti@0.0.6</tspan>
