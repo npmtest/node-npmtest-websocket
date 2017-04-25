@@ -1,4 +1,7 @@
-# test coverage for  [websocket (v1.0.24)](https://github.com/theturtle32/WebSocket-Node)  [![npm package](https://img.shields.io/npm/v/npmtest-websocket.svg?style=flat-square)](https://www.npmjs.org/package/npmtest-websocket) [![travis-ci.org build-status](https://api.travis-ci.org/npmtest/node-npmtest-websocket.svg)](https://travis-ci.org/npmtest/node-npmtest-websocket)
+# npmtest-websocket
+
+#### basic test coverage for  [websocket (v1.0.24)](https://github.com/theturtle32/WebSocket-Node)  [![npm package](https://img.shields.io/npm/v/npmtest-websocket.svg?style=flat-square)](https://www.npmjs.org/package/npmtest-websocket) [![travis-ci.org build-status](https://api.travis-ci.org/npmtest/node-npmtest-websocket.svg)](https://travis-ci.org/npmtest/node-npmtest-websocket)
+
 #### Websocket Client & Server Library implementing the WebSocket protocol as specified in RFC 6455.
 
 [![NPM](https://nodei.co/npm/websocket.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/websocket)
@@ -7,7 +10,7 @@
 |--:|:--|
 | coverage : | [![istanbul-coverage](https://npmtest.github.io/node-npmtest-websocket/build/coverage.badge.svg)](https://npmtest.github.io/node-npmtest-websocket/build/coverage.html/index.html)|
 | test-report : | [![test-report](https://npmtest.github.io/node-npmtest-websocket/build/test-report.badge.svg)](https://npmtest.github.io/node-npmtest-websocket/build/test-report.html)|
-| build-artifacts : | [![build-artifacts](https://npmtest.github.io/node-npmtest-websocket/glyphicons_144_folder_open.png)](https://github.com/npmtest/node-npmtest-websocket/tree/gh-pages/build)|
+| test-server-github : | [![github.com test-server](https://npmtest.github.io/node-npmtest-websocket/GitHub-Mark-32px.png)](https://npmtest.github.io/node-npmtest-websocket/build/app/index.html) | | build-artifacts : | [![build-artifacts](https://npmtest.github.io/node-npmtest-websocket/glyphicons_144_folder_open.png)](https://github.com/npmtest/node-npmtest-websocket/tree/gh-pages/build)|
 
 - [https://npmtest.github.io/node-npmtest-websocket/build/coverage.html/index.html](https://npmtest.github.io/node-npmtest-websocket/build/coverage.html/index.html)
 
@@ -107,7 +110,8 @@
         "install": "(node-gyp rebuild 2> builderror.log) || (exit 0)",
         "test": "faucet test/unit"
     },
-    "version": "1.0.24"
+    "version": "1.0.24",
+    "bin": {}
 }
 ```
 
